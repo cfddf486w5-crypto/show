@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root{
-      --primary:#0072C6;
-      --bg:#F5F6F8;
+      --primary:#1f4ed8;
+      --bg:#f3f6fb;
       --card:#ffffff;
-      --border:#E1E4E8;
+      --border:#d7e0ef;
       --text:#111827;
-      --muted:#6b7280;
+      --muted:#64748b;
       --ok:#10b981;
       --warn:#f59e0b;
     }
@@ -159,6 +159,23 @@
   <div class="wms-nav-title">Complément WMS</div>
   <div class="wms-nav-links">
     <a href="../index.html">Accueil</a>
+    <details class="wms-dropdown">
+      <summary>Modules ▾</summary>
+      <div class="wms-dropdown-menu">
+        <a href="../apps/inventaire/inventaire.html">Inventaire</a>
+        <a href="../apps/consolidation/consolidation.html">Consolidation</a>
+        <a href="../apps/expeditions/expeditions.html">Expéditions</a>
+      </div>
+    </details>
+    <details class="wms-dropdown">
+      <summary>Documentation ▾</summary>
+      <div class="wms-dropdown-menu">
+        <a href="../docs/taches.html">Tâches</a>
+        <a href="../docs/parametres.html">Paramètres</a>
+        <a href="../docs/historique.html">Historique</a>
+        <a href="../docs/about.html">À propos</a>
+      </div>
+    </details>
   </div>
 </nav>
 
@@ -196,6 +213,9 @@
 
   <div class="card" id="tasksCard">
     <h2>Tâches à exécuter</h2>
+    <p id="emptyTasksMessage" style="display:none;font-size:0.8rem;color:var(--muted);margin:0.35rem 0 0.6rem;">
+      Aucune tâche à afficher pour ce filtre. Réinitialise les filtres ou importe des données.
+    </p>
     <div id="tasksContainer">
       <!-- Exemple de tâches statiques comme base visuelle -->
       <div class="task" data-src="conso" data-prio="H" data-zone="L3A">
@@ -288,6 +308,7 @@ function applyFilters(){
   const prio = document.getElementById('prioFilter').value;
   const zone = (document.getElementById('zoneFilter').value || '').toUpperCase().trim();
 
+  let visibleCount = 0;
   document.querySelectorAll('.task').forEach(t=>{
     const tSrc = t.getAttribute('data-src') || '';
     const tPrio = t.getAttribute('data-prio') || '';
@@ -300,7 +321,13 @@ function applyFilters(){
     if(zone && tZone.indexOf(zone) !== 0) visible = false;
 
     t.style.display = visible ? 'flex' : 'none';
+    if(visible) visibleCount += 1;
   });
+
+  const emptyMessage = document.getElementById('emptyTasksMessage');
+  if(emptyMessage){
+    emptyMessage.style.display = visibleCount ? 'none' : 'block';
+  }
 }
 </script>
 
