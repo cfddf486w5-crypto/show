@@ -8,9 +8,9 @@
 
 <style>
 :root{
-  --primary:#0072C6;
-  --bg:#F5F6F8;
-  --border:#E1E4E8;
+  --primary:#1f4ed8;
+  --bg:#f3f6fb;
+  --border:#d7e0ef;
   --text:#222;
 }
 *{box-sizing:border-box;}
@@ -149,7 +149,7 @@ button{
   cursor:pointer;
   font-size:0.9rem;
 }
-button.secondary{ background:#6b7280; }
+button.secondary{ background:#64748b; }
 button.ghost{ background:#e5e7eb; color:#374151; }
 
 /* ID + modes */
@@ -221,7 +221,7 @@ button.ghost{ background:#e5e7eb; color:#374151; }
 }
 #currentCommandes li:last-child{ border-bottom:none; }
 
-.small{ font-size:0.8rem; color:#6b7280; }
+.small{ font-size:0.8rem; color:#64748b; }
 
 /* transport rectangles */
 .transport-summary{ margin-top:0.2rem; }
@@ -284,7 +284,7 @@ button.ghost{ background:#e5e7eb; color:#374151; }
 }
 .manifest-item:last-child{ border-bottom:none; }
 .manifest-main{ font-weight:500; }
-.manifest-sub{ color:#6b7280; font-size:0.75rem; }
+.manifest-sub{ color:#64748b; font-size:0.75rem; }
 
 @media print{
   #cardPalette{ display:none; }
@@ -346,6 +346,23 @@ button.ghost{ background:#e5e7eb; color:#374151; }
   <div class="wms-nav-title">Complément WMS</div>
   <div class="wms-nav-links">
     <a href="../../index.html">Accueil</a>
+    <details class="wms-dropdown">
+      <summary>Modules ▾</summary>
+      <div class="wms-dropdown-menu">
+        <a href="../../apps/inventaire/inventaire.html">Inventaire</a>
+        <a href="../../apps/consolidation/consolidation.html">Consolidation</a>
+        <a href="../../apps/expeditions/expeditions.html">Expéditions</a>
+      </div>
+    </details>
+    <details class="wms-dropdown">
+      <summary>Documentation ▾</summary>
+      <div class="wms-dropdown-menu">
+        <a href="../../docs/taches.html">Tâches</a>
+        <a href="../../docs/parametres.html">Paramètres</a>
+        <a href="../../docs/historique.html">Historique</a>
+        <a href="../../docs/about.html">À propos</a>
+      </div>
+    </details>
   </div>
 </nav>
 
@@ -848,7 +865,7 @@ function renderArchives(){
   const btnExport = document.createElement('button');
   btnExport.type = "button";
   btnExport.className = "transport-btn";
-  btnExport.innerHTML = '<span class="tile-left" style="color:#0072C6;font-weight:700;">Export PDF</span><span class="count-pill">⤓</span>';
+  btnExport.innerHTML = '<span class="tile-left" style="color:#1f4ed8;font-weight:700;">Export PDF</span><span class="count-pill">⤓</span>';
   btnExport.addEventListener('click', exportManifest);
   wrapExport.appendChild(btnExport);
   container.appendChild(wrapExport);

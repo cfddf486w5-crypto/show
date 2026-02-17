@@ -7,11 +7,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
 :root{
-  --blue:#2d63ea;
-  --bg:#030c22;
-  --card:#0b1b3d;
-  --muted:#91acd9;
-  --line:#23437d;
+  --blue:#1f4ed8;
+  --bg:#f3f6fb;
+  --card:#ffffff;
+  --muted:#64748b;
+  --line:#d7e0ef;
 }
 *{box-sizing:border-box}
 body[data-mode="terrain"] .expert-only{display:none;}
@@ -52,17 +52,14 @@ body[data-mode="terrain"] footer{
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  color:#e5efff;
-  background:
-    radial-gradient(circle at 8% 4%, rgba(66,133,255,.24), transparent 30%),
-    radial-gradient(circle at 86% 92%, rgba(23,148,250,.20), transparent 35%),
-    linear-gradient(180deg,#010817 0%,#071532 45%,#020817 100%);
+  color:var(--text);
+  background:var(--bg);
 }
 header{
-  background:linear-gradient(120deg,#0f2759 10%,#123774 55%,#1a4a95 100%);
+  background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
   color:#fff;
   padding:18px 16px;
-  border-bottom:1px solid rgba(100,156,255,.35);
+  border-bottom:1px solid #bfd0ea;
 }
 header h1{margin:0;font-size:20px}
 header p{margin:6px 0 0;font-size:13px;opacity:.9}
@@ -73,8 +70,8 @@ main{padding:14px;max-width:1120px;margin:0 auto;}
   padding:14px;
   margin-bottom:12px;
   border:1px solid var(--line);
-  box-shadow:0 0 0 1px rgba(95,147,255,.15),0 12px 28px rgba(0,0,0,.4);
-  backdrop-filter:blur(2px);
+  box-shadow:0 8px 24px rgba(15,23,42,.08);
+
 }
 .card h3{margin:0 0 10px;font-size:16px}
 .stat{
@@ -90,8 +87,8 @@ input[type=file]{
   width:100%;
   padding:10px;
   font-size:14px;
-  color:#d8e6ff;
-  background:#0a1631;
+  color:var(--text);
+  background:#ffffff;
   border:1px solid var(--line);
   border-radius:10px;
 }
@@ -106,9 +103,9 @@ input[type=file]{
 button,
 select,
 input[type="text"]{
-  background:linear-gradient(180deg,#102653,#0b1c3d);
-  color:#e5efff;
-  border:1px solid #2f5392 !important;
+  background:#ffffff;
+  color:var(--text);
+  border:1px solid #c6d5ea !important;
   border-radius:10px !important;
 }
 
@@ -123,29 +120,29 @@ button:hover{filter:brightness(1.08)}
 table{
   width:100%;
   border-collapse:collapse;
-  background:rgba(8,23,51,.65);
-  border:1px solid rgba(96,150,255,.24);
+  background:#ffffff;
+  border:1px solid #d7e0ef;
   border-radius:10px;
   overflow:hidden;
 }
 
 th,td{
   padding:8px;
-  border-bottom:1px solid rgba(120,165,245,.18);
+  border-bottom:1px solid #e2e8f0;
 }
 
 th{
   text-align:left;
   font-size:12px;
   letter-spacing:.02em;
-  color:#bcd4ff;
-  background:rgba(18,44,92,.9);
+  color:#334155;
+  background:#eef3ff;
 }
 
-tr:hover td{background:rgba(41,79,150,.18)}
+tr:hover td{background:#f8fbff}
 
 footer{
-  color:#8ea8d6;
+  color:var(--muted);
   text-align:center;
   padding:8px 0 14px;
 }
@@ -156,6 +153,23 @@ footer{
   <div class="wms-nav-title">Complément WMS</div>
   <div class="wms-nav-links">
     <a href="../../index.html">Accueil</a>
+    <details class="wms-dropdown">
+      <summary>Modules ▾</summary>
+      <div class="wms-dropdown-menu">
+        <a href="../../apps/inventaire/inventaire.html">Inventaire</a>
+        <a href="../../apps/consolidation/consolidation.html">Consolidation</a>
+        <a href="../../apps/expeditions/expeditions.html">Expéditions</a>
+      </div>
+    </details>
+    <details class="wms-dropdown">
+      <summary>Documentation ▾</summary>
+      <div class="wms-dropdown-menu">
+        <a href="../../docs/taches.html">Tâches</a>
+        <a href="../../docs/parametres.html">Paramètres</a>
+        <a href="../../docs/historique.html">Historique</a>
+        <a href="../../docs/about.html">À propos</a>
+      </div>
+    </details>
   </div>
 </nav>
 
@@ -245,7 +259,7 @@ function filterByZone(){
       <button onclick="setMode('expert')" style="padding:6px 10px;border-radius:6px;border:1px solid #1f4fd8;cursor:pointer;">
         Mode Expert (PC)
       </button>
-      <button onclick="setMode('terrain')" style="padding:6px 10px;border-radius:6px;border:1px solid #6b7280;cursor:pointer;">
+      <button onclick="setMode('terrain')" style="padding:6px 10px;border-radius:6px;border:1px solid #64748b;cursor:pointer;">
         Mode Terrain (Lecture seule)
       </button>
     </div>
@@ -318,7 +332,7 @@ style="margin-top:8px;padding:8px 12px;border-radius:6px;border:1px solid #11182
       <button onclick="setTerrainView('tasks')" style="padding:6px 10px;border-radius:6px;border:1px solid #10b981;cursor:pointer;">
         Afficher uniquement les tâches
       </button>
-      <button onclick="setTerrainView('all')" style="padding:6px 10px;border-radius:6px;border:1px solid #6b7280;cursor:pointer;">
+      <button onclick="setTerrainView('all')" style="padding:6px 10px;border-radius:6px;border:1px solid #64748b;cursor:pointer;">
         Afficher toutes les sections
       </button>
     </div>
@@ -326,7 +340,7 @@ style="margin-top:8px;padding:8px 12px;border-radius:6px;border:1px solid #11182
       <label class="small">Filtrer par zone (ex : L2, L3A) :</label><br/>
       <input id="tasksZoneFilter" type="text" placeholder="Zone (optionnel)" 
              style="margin-top:2px;width:140px;border-radius:6px;border:1px solid #d1d5db;padding:4px;font-size:12px;"/>
-      <button onclick="renderTasks()" style="padding:4px 8px;border-radius:6px;border:1px solid #6b7280;cursor:pointer;font-size:12px;">
+      <button onclick="renderTasks()" style="padding:4px 8px;border-radius:6px;border:1px solid #64748b;cursor:pointer;font-size:12px;">
         Appliquer
       </button>
     </div>
