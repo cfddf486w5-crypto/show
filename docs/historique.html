@@ -25,7 +25,7 @@
       color:var(--text);
     }
     header{
-      background:var(--primary);
+      background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
       color:#fff;
       padding:1rem;
     }
@@ -77,7 +77,7 @@
       padding:0.35rem 0.7rem;
       border-radius:999px;
       border:none;
-      background:var(--primary);
+      background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
       color:#fff;
       font-size:0.8rem;
       cursor:pointer;
@@ -245,7 +245,10 @@
         <option value="M">Moyenne</option>
         <option value="B">Basse</option>
       </select>
-      <input id="zoneFilter" type="text" placeholder="Zone (ex: L2, L3A)" />
+      <select id="zoneFilter" class="zone-select">
+        <option value="">Zone (toutes)</option>
+        <option value="L2">L2</option><option value="L3A">L3A</option><option value="L3B">L3B</option><option value="L3C">L3C</option><option value="L3D">L3D</option>
+      </select>
       <button type="button" onclick="applyFilters()">Appliquer</button>
     </div>
     <p class="muted">
