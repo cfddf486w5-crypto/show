@@ -21,7 +21,7 @@ body{
   color:var(--text);
 }
 header{
-  background:var(--primary);
+  background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
   color:#fff;
   padding:0.8rem 1rem;
   font-size:1.1rem;
@@ -71,7 +71,7 @@ main{
 .muted{color:#555;font-size:0.85rem}
 
 button{
-  background:var(--primary);
+  background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
   color:#fff;
   border:none;
   border-radius:999px;
@@ -226,7 +226,10 @@ footer{
     <div class="chevron">▾</div>
   </div>
   <div class="card-body">
-    <input type="file" id="fileInv" accept=".csv">
+    <div class="input-row">
+      <input type="file" id="fileInv" accept=".csv">
+      <button type="button" onclick="triggerImportCSV()">Importer CSV</button>
+    </div>
     <div id="importStatus" class="muted" style="margin-top:0.3rem;">Aucun fichier importé.</div>
   </div>
 </div>
@@ -328,6 +331,10 @@ footer{
   </div>
   <div class="card-body">
     <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.4rem;">
+      <select id="terrainZoneFilter" class="zone-select" onchange="runConsolidation()">
+        <option value="">Zone (toutes)</option>
+        <option value="L2">L2</option><option value="L3A">L3A</option><option value="L3B">L3B</option><option value="L3C">L3C</option><option value="L3D">L3D</option>
+      </select>
       <button onclick="exportWorkplanPDF()">Plan de travail PDF</button>
     </div>
     <table>
@@ -357,6 +364,10 @@ footer{
   </div>
   <div class="card-body">
     <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.4rem;">
+      <select id="taskZoneFilter" class="zone-select" onchange="runConsolidation()">
+        <option value="">Zone (toutes)</option>
+        <option value="L2">L2</option><option value="L3A">L3A</option><option value="L3B">L3B</option><option value="L3C">L3C</option><option value="L3D">L3D</option>
+      </select>
       <button onclick="exportCSV()">Export CSV</button>
       <button class="secondary" onclick="exportPDF()">Export PDF</button>
     </div>
@@ -445,15 +456,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   loadParams();
 });
 
-document.getElementById('fileInv').addEventListener('change',e=>{
-  const file=e.target.files[0];
-  if(!file) return;
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    parseCSV(ev.target.result);
-    runConsolidation();
-  };
-  reader.readAsText(file,'ISO-8859-1');
+document.getElementById('fileInv').addEventListener('change',()=>{
+  triggerImportCSV();
 });
 
 document.getElementById('minQty').addEventListener('change',()=>{
@@ -489,6 +493,21 @@ if(binCapRulesInput){
     saveParams();
     runConsolidation();
   });
+}
+
+function triggerImportCSV(){
+  const fileInput=document.getElementById('fileInv');
+  if(!fileInput || !fileInput.files || !fileInput.files[0]){
+    alert('Choisis un fichier CSV avant d'importer.');
+    return;
+  }
+  const file=fileInput.files[0];
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    parseCSV(ev.target.result);
+    runConsolidation();
+  };
+  reader.readAsText(file,'ISO-8859-1');
 }
 
 function parseCSV(text){
@@ -644,10 +663,18 @@ function runConsolidation(){
   }
 
   const topN=params.topN||5;
-  const toShow=tasksAll.slice(0,topN);
+  let toShow=tasksAll.slice(0,topN);
+  const zoneTasks=((document.getElementById('taskZoneFilter')||{}).value||'').trim();
+  const zoneTerrain=((document.getElementById('terrainZoneFilter')||{}).value||'').trim();
+
+  if(zoneTasks){
+    toShow=toShow.filter(t=>(t.from && t.from.startsWith(zoneTasks)) || (t.to && t.to.startsWith(zoneTasks)));
+  }
+
   // construit la vue terrain à partir du même Top N
   const terrainMapDisplay={};
   toShow.forEach(t=>{
+    if(zoneTerrain && !(t.to && t.to.startsWith(zoneTerrain)) && !(t.from && t.from.startsWith(zoneTerrain))) return;
     if(!terrainMapDisplay[t.to]){
       terrainMapDisplay[t.to]={bin:t.to,totalQty:0,count:0,sources:[]};
     }
