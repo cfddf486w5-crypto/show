@@ -1,11 +1,11 @@
 
 :root{
-  --primary:#0072C6;
-  --bg:#F5F6F8;
-  --card:#ffffff;
-  --border:#E1E4E8;
-  --text:#111827;
-  --muted:#6b7280;
+  --primary:#2f6bff;
+  --bg:#020b1f;
+  --card:#0b1938;
+  --border:#21407c;
+  --text:#dce8ff;
+  --muted:#8ea8d6;
 }
 
 /* Base */
@@ -13,13 +13,16 @@
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  background:var(--bg);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(65,116,255,.25), transparent 38%),
+    radial-gradient(circle at 85% 100%, rgba(16,151,255,.18), transparent 42%),
+    linear-gradient(180deg,#020818 0%,#040f2b 60%,#020919 100%);
   color:var(--text);
 }
 
 /* Generic header + footer */
 header{
-  background:var(--primary);
+  background:linear-gradient(135deg,#0d2147,#112d65 50%,#1e3f83);
   color:#fff;
 }
 header h1{
@@ -41,7 +44,7 @@ footer{
   background:var(--card);
   border-radius:12px;
   border:1px solid var(--border);
-  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+  box-shadow:0 0 0 1px rgba(94,157,255,0.12),0 14px 30px rgba(0,0,0,0.45);
 }
 .tag{
   display:inline-block;
@@ -59,7 +62,7 @@ a.btn, button.btn{
   justify-content:center;
   padding:0.4rem 0.85rem;
   border-radius:999px;
-  background:var(--primary);
+  background:linear-gradient(180deg,#3a7dff,#2458d8);
   color:#fff;
   font-size:0.82rem;
   font-weight:600;
@@ -70,17 +73,19 @@ a.btn, button.btn{
 
 /* Mini barre de navigation Complément */
 .wms-nav{
-  background:#0f172a;
-  color:#e5e7eb;
+  background:linear-gradient(180deg, rgba(7,22,53,.96), rgba(4,15,39,.96));
+  color:#dbe8ff;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   font-size:0.8rem;
-  padding:0.35rem 0.7rem;
+  padding:0.55rem 0.9rem;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  border-bottom:1px solid rgba(80,132,255,.25);
+  box-shadow:0 8px 22px rgba(0,0,0,.35);
 }
 .wms-nav a{
-  color:#e5e7eb;
+  color:#dbe8ff;
   text-decoration:none;
 }
 .wms-nav a:hover{
@@ -97,7 +102,7 @@ a.btn, button.btn{
 
 /* Liens rapides entre modules */
 .wms-links{
-  background:rgba(15,23,42,0.03);
+  background:rgba(7,20,50,0.55);
   padding:0.35rem 0.75rem;
   font-size:0.78rem;
   display:flex;
@@ -107,10 +112,10 @@ a.btn, button.btn{
 }
 .wms-links-label{
   font-weight:500;
-  color:var(--muted);
+  color:#9cb6e6;
 }
 .wms-links a{
-  color:#2563eb;
+  color:#7fb0ff;
   text-decoration:none;
 }
 .wms-links a:hover{
