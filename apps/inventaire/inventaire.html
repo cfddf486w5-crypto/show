@@ -1122,12 +1122,6 @@ function updateUI(){
 
   // ======================
   // Liste de tâches
-
-<button onclick="exportTasksPDF()" class="expert-only" 
-style="margin-top:8px;padding:8px 12px;border-radius:6px;border:1px solid #111827;background:#111827;color:white;cursor:pointer;">
-  Exporter PDF – Tâches terrain
-</button>
- (opérationnelle)
   // ======================
   var tasks = [];
 
@@ -1234,7 +1228,6 @@ style="margin-top:8px;padding:8px 12px;border-radius:6px;border:1px solid #11182
       el.innerHTML = html;
     }
   }
-}
 
 
   
@@ -1398,7 +1391,6 @@ function exportMovesExcel(){
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-}
 }
 
   function exportTasks(){

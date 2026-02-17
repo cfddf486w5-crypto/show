@@ -940,14 +940,10 @@ function exportManifest(){
     alert("Impossible d’ouvrir la fenêtre d’export (popup bloqué?).");
     return;
   }
-  w.document.write("<html><head>
-  <link rel="stylesheet" href="../../assets/css/wms.css"><title>Manifeste "+currentDay+"</title></head><body>");
+  w.document.write("<html><head><link rel=\"stylesheet\" href=\"../../assets/css/wms.css\"><title>Manifeste " + currentDay + "</title></head><body>");
   w.document.write("<h3>Manifeste des expéditions – "+currentDay+"</h3>");
   w.document.write(table);
-  w.document.write("<footer>
-  © 2026 – Complément WMS – Version v1.0 · Phase 4
-</footer>
-</body></html>");
+  w.document.write("<footer>© 2026 – Complément WMS – Version v1.0 · Phase 4</footer></body></html>");
   w.document.close();
   w.focus();
   // iPhone : Partager / Imprimer > Enregistrer en PDF
