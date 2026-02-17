@@ -8,10 +8,10 @@
 <style>
 :root{
   --blue:#1f4ed8;
-  --bg:#f3f6fb;
-  --card:#ffffff;
-  --muted:#64748b;
-  --line:#d7e0ef;
+  --bg:#020817;
+  --card:rgba(11, 23, 58, 0.84);
+  --muted:#9db2d8;
+  --line:#2d4f8d;
 }
 *{box-sizing:border-box}
 body[data-mode="terrain"] .expert-only{display:none;}
@@ -53,7 +53,7 @@ body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
-  background:var(--bg);
+  background:radial-gradient(circle at 20% 0%, rgba(59,130,246,.2), transparent 35%),linear-gradient(180deg,#010613 0%, #03112f 45%, #04163d 100%);
 }
 header{
   background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
@@ -88,7 +88,7 @@ input[type=file]{
   padding:10px;
   font-size:14px;
   color:var(--text);
-  background:#ffffff;
+  background:rgba(9,24,61,.92);
   border:1px solid var(--line);
   border-radius:10px;
 }
@@ -103,7 +103,7 @@ input[type=file]{
 button,
 select,
 input[type="text"]{
-  background:#ffffff;
+  background:rgba(9,24,61,.92);
   color:var(--text);
   border:1px solid #c6d5ea !important;
   border-radius:10px !important;
@@ -120,7 +120,7 @@ button:hover{filter:brightness(1.08)}
 table{
   width:100%;
   border-collapse:collapse;
-  background:#ffffff;
+  background:rgba(9,24,61,.92);
   border:1px solid #d7e0ef;
   border-radius:10px;
   overflow:hidden;
@@ -238,7 +238,7 @@ function filterByZone(){
   <div style="display:flex;gap:8px;flex-wrap:wrap;">
     <button onclick="showTasksOnly()">📋 Tâches seulement</button>
     <button onclick="showAllSections()">📦 Tout afficher</button>
-    <select id="zoneFilter" onchange="filterByZone()" style="min-height:40px;">
+    <select id="zoneFilter" onchange="filterByZone()" class="zone-select" style="min-height:40px;">
       <option value="">Filtrer par zone</option>
       <option value="L2">L2</option>
       <option value="L3A">L3A</option>
@@ -282,11 +282,10 @@ function filterByZone(){
   </div>
   <div class="card expert-only">
     <h3>1. Importer ton inventaire (CSV)</h3>
-    <input id="csvFileInput" type="file" accept=".csv,text/csv" onchange="loadCSV(this)" />
-    <div style="margin-top:6px;">
-      <button type="button" onclick="var f=document.getElementById('csvFileInput'); if(f){ loadCSV(f); }" 
-              style="padding:6px 10px;border-radius:6px;border:1px solid #111827;background:#111827;color:white;cursor:pointer;font-size:12px;">
-        Lancer l'import
+    <div class="input-row" style="margin-top:6px;">
+      <input id="csvFileInput" type="file" accept=".csv,text/csv" onchange="loadCSV(this)" />
+      <button type="button" onclick="var f=document.getElementById('csvFileInput'); if(f){ loadCSV(f); }" style="padding:6px 10px;border-radius:6px;border:1px solid #111827;background:#111827;color:white;cursor:pointer;font-size:12px;">
+        Importer CSV
       </button>
     </div>
     <p id="importStatus" class="small muted">Aucun fichier importé pour le moment.</p>
@@ -337,9 +336,15 @@ style="margin-top:8px;padding:8px 12px;border-radius:6px;border:1px solid #11182
       </button>
     </div>
     <div class="terrain-only" style="margin:4px 0 6px 0;">
-      <label class="small">Filtrer par zone (ex : L2, L3A) :</label><br/>
-      <input id="tasksZoneFilter" type="text" placeholder="Zone (optionnel)" 
-             style="margin-top:2px;width:140px;border-radius:6px;border:1px solid #d1d5db;padding:4px;font-size:12px;"/>
+      <label class="small">Filtrer par zone :</label><br/>
+      <select id="tasksZoneFilter" class="zone-select" style="margin-top:2px;width:160px;font-size:12px;">
+        <option value="">Toutes les zones</option>
+        <option value="L2">L2</option>
+        <option value="L3A">L3A</option>
+        <option value="L3B">L3B</option>
+        <option value="L3C">L3C</option>
+        <option value="L3D">L3D</option>
+      </select>
       <button onclick="renderTasks()" style="padding:4px 8px;border-radius:6px;border:1px solid #64748b;cursor:pointer;font-size:12px;">
         Appliquer
       </button>
@@ -377,8 +382,15 @@ style="margin-top:8px;padding:8px 12px;border-radius:6px;border:1px solid #11182
         </select>
       </label>
       &nbsp;&nbsp;
-      <label>Zone (préfixe bin, ex : L3A) :
-        <input id="emptyZoneFilter" type="text" style="width:90px;" />
+      <label>Zone :
+        <select id="emptyZoneFilter" class="zone-select" style="width:120px;">
+          <option value="">Toutes</option>
+          <option value="L2">L2</option>
+          <option value="L3A">L3A</option>
+          <option value="L3B">L3B</option>
+          <option value="L3C">L3C</option>
+          <option value="L3D">L3D</option>
+        </select>
       </label>
       &nbsp;
       <button onclick="renderEmptyBins()" style="padding:4px 8px;border-radius:6px;border:1px solid #ccc;cursor:pointer;font-size:11px;">
