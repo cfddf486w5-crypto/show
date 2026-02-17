@@ -8,21 +8,21 @@
   <style>
     :root{
       --primary:#1f4ed8;
-      --bg:#020817;
-      --card:rgba(11, 23, 58, 0.84);
-      --border:#2d4f8d;
-      --text:#e8efff;
-      --muted:#9db2d8;
+      --bg:#f3f6fb;
+      --card:#ffffff;
+      --border:#d7e0ef;
+      --text:#111827;
+      --muted:#64748b;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-      background:radial-gradient(circle at 20% 0%, rgba(59,130,246,.2), transparent 35%),linear-gradient(180deg,#010613 0%, #03112f 45%, #04163d 100%);
+      background:var(--bg);
       color:var(--text);
     }
     header{
-      background:linear-gradient(120deg,#1e40af 10%,#1f4ed8 55%,#2967f3 100%);
+      background:var(--primary);
       color:#fff;
       padding:1rem;
     }
@@ -46,7 +46,7 @@
       border:1px solid var(--border);
       padding:0.9rem 1rem;
       margin-bottom:0.9rem;
-      box-shadow:0 14px 30px rgba(9,15,38,.45), inset 0 0 0 1px rgba(104,149,246,.2);
+      box-shadow:0 1px 4px rgba(0,0,0,0.06);
     }
     .card h2{
       margin:0 0 0.5rem;
